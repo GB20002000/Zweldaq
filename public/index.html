@@ -1,33 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Zweldaq Monitoring Dashboard</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-  <div class="container">
-    <div class="header">ZWELDAQ MONITORING</div>
-    <div class="time-consuming">TIME CONSUMING<br><strong id="count">00:00:00</strong></div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zweldaq Monitoring Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">ZWELDAQ MONITORING</div>
+      <div class="time-consuming">Device ID<br />
+        <strong id="device_id">N/A</strong>
+        <strong id="Status">Offline</strong>
+      </div>
+      <div id="datetime"></div>
 
-    <div class="circle-row">
-      <div class="circle-box current">
-        <div class="circle-label">Current</div>
-        <div class="circle-value" id="ucount">0</div>
+      <div class="circle-row">
+        <div class="circle-box current">
+          <div class="circle-label">Current</div>
+          <div class="circle-value" id="current">0</div>
+        </div>
+        <div class="circle-box voltage">
+          <div class="circle-label">Voltage</div>
+          <div class="circle-value" id="voltage">0</div>
+        </div>
+        <div class="circle-box bill2">
+          <div class="circle-label">Feeding Rate</div>
+          <div class="circle-value" id="feeding_rate">0</div>
+        </div>
       </div>
-      <div class="circle-box voltage">
-        <div class="circle-label">Voltage</div>
-        <div class="circle-value" id="billcount">0</div>
-      </div>
-      <div class="circle-box bill2">
-        <div class="circle-label">Feeding Rate</div>
-        <div class="circle-value" id="Set_Value">0</div>
-      </div>
+      <div style="margin-top: 40px" id="json_data"></div>
     </div>
-  </div>
 
-  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
-  <script src="app.js"></script>
-</body>
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <script src="app.js"></script>
+  </body>
 </html>

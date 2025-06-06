@@ -1,51 +1,53 @@
-const count = document.getElementById("count");
-const ucount = document.getElementById("ucount");
-const billcount = document.getElementById("billcount");
-const Set_Value_Element = document.getElementById("Set_Value");
-
-const storedLastName = localStorage.getItem("lastname");
-if (storedLastName) {
-  Set_Value_Element.innerText = storedLastName;
-}
-
-const broker = "wss://1fae4ab464e64fe9be19c16c1101c1be.s1.eu.hivemq.cloud:8884/mqtt";
+const current= document.getElementById('current');
+const voltage=document.getElementById('voltage');
+const feeding_rate=document.getElementById('feeding_rate');
+const device_id=document.getElementById('device_id')
+const datetime=document.getElementById('datetime')
+const Status=document.getElementById('Status')
+const json_data=document.getElementById('json_data')
+const broker = "wss://b80fbd3540024c028b9515accaa12fb5.s1.eu.hivemq.cloud:8884/mqtt";
 const options = {
   clientId: "web_" + crypto.randomUUID(),
-  username: "Check",
-  password: "2025Black",
+  username: "Zweldaq",
+  password: "Zweldaq_V2",
   clean: true
 };
-
+function updatetime(){
+  datetime.innerHTML=new Date().toLocaleString()
+}
+updatetime();
+setInterval(updatetime,1000)
 const client = mqtt.connect(broker, options);
 
 client.on("connect", () => {
   console.log("Connected to HiveMQ Cloud");
-  client.subscribe("Switch");
-  client.subscribe("Switch2");
-  client.subscribe("Switch3");
-  client.subscribe("Alert1");
-  client.subscribe("Alert2");
-
-  if (storedLastName) {
-    client.publish("seet_value", storedLastName);
-  }
+  client.subscribe("zweldaq_data");
+  client.subscribe('status');
 });
 
-client.on("message", (topic, message) => {
+client.on("message", async (topic, message) => {
+  const msgStr = message.toString();
   try {
     const data = JSON.parse(message.toString());
     console.log(`Message on ${topic}:`, data);
 
-    if (topic === "Switch") {
-      count.innerHTML = `${data.voltage} ${data.Vunit}`;
-    } else if (topic === "Switch2") {
-      ucount.innerHTML = `${data.voltage} ${data.Vunit}`;
-    } else if (topic === "Switch3") {
-      billcount.innerHTML = `${data.voltage} ${data.Vunit}`;
-      Set_Value_Element.innerHTML = `${data.voltage} ${data.Vunit}`;
+    if (topic === "zweldaq_data") {
+      device_id.innerHTML=data.device_id
+      voltage.innerHTML = `${data.Voltage} ${data.vunit}`;
+      current.innerHTML=`${data.current} ${data.cunit}`;
+      feeding_rate.innerHTML=`${data.feedingvalue}`;
+      json_data.innerHTML=JSON.stringify(data);
     } 
-    // You can add handling for Alert1 and Alert2 here if needed
+    if(topic==='status'){
+       Status.innerHTML = data.status || JSON.stringify(data);
+
+    }
   } catch (error) {
     console.error("Error parsing MQTT message:", error);
+     console.warn("Non-JSON message received:", msgStr);
+
+    if (topic === "status") {
+      Status.innerHTML = msgStr;
+    }
   }
 });
