@@ -1,0 +1,140 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    color: white;
+    text-align: center;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .container {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 420px;
+    width: 100%;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  }
+  
+  .header {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
+  }
+  
+  .time-consuming {
+    font-size: 20px;
+    margin-bottom: 35px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+  }
+  
+  .time-consuming strong {
+    display: block;
+    font-size: 38px;
+    margin-top: 10px;
+    color: #fff8a6;
+    text-shadow: 1px 1px 6px rgba(255, 255, 0, 0.7);
+  }
+  
+  /* Circle displays container */
+  .circle-row {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  /* Individual circle */
+  .circle-box {
+    background: #ffffff22; /* semi-transparent white */
+    border-radius: 50%;
+    width: 130px;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    transition: background 0.3s ease;
+    cursor: default;
+  }
+  
+  /* Colored circle backgrounds */
+  .circle-box.current {
+    background: #4caf50; /* green */
+    box-shadow: 0 8px 25px #4caf50cc;
+  }
+  
+  .circle-box.voltage {
+    background: #ff9800; /* orange */
+    box-shadow: 0 8px 25px #ff9800cc;
+  }
+  
+  .circle-box.bill2 {
+    background: #2196f3; /* blue */
+    box-shadow: 0 8px 25px #2196f3cc;
+  }
+  
+  .circle-box:hover {
+    filter: brightness(1.1);
+    box-shadow: 0 10px 35px rgba(0,0,0,0.5);
+  }
+  
+  /* Labels */
+  .circle-label {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+    user-select: none;
+  }
+  
+  /* Value text */
+  .circle-value {
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: 1.3px;
+    user-select: none;
+    color: #fff;
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+  }
+  
+  /* Responsive */
+  @media (max-width: 480px) {
+    .circle-row {
+      flex-direction: column;
+      gap: 25px;
+    }
+  
+    .circle-box {
+      width: 100%;
+      max-width: 260px;
+      height: 130px;
+      border-radius: 20px;
+      flex-direction: row;
+      justify-content: flex-start;
+      padding-left: 30px;
+      text-align: left;
+    }
+  
+    .circle-label {
+      font-size: 16px;
+      margin-bottom: 0;
+      margin-right: 15px;
+      flex: 1;
+    }
+  
+    .circle-value {
+      font-size: 24px;
+      flex: 1;
+    }
+  }
+  
